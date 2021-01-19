@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+    	<meta charset=utf-8>
+    	<title>Validar contraseña</title>
+        <script language="javascript" type="text/javascript">
+		function validar_form()
+		{
+			var password = document.getElementById('password').value;
+			if(validar_clave(password) == true)
+			{
+				alert('Contraseña muy segura');
+			}
+			else
+			{
+				alert('Contraseña es insegura');
+			}
+		}
+		function validar_clave(password)
+		{
+			if(password.length >= 16)
+			{		
+				var mayuscula = false;
+				var minuscula = false;
+				var numero = false;
+				var caracter_especial = false;
+				var letras = false;
+				var num = false;
+				var caracter = false;
+				
+				for(var i = 0;i<password.length;i++)
+				{
+					if(password.charCodeAt(i) >= 65 && password.charCodeAt(i) <= 90){
+						mayuscula = true;
+					}else if(password.charCodeAt(i) >= 97 && password.charCodeAt(i) <= 122){
+						minuscula = true;
+					}else if(password.charCodeAt(i) > 48 && password.charCodeAt(i) <= 57){
+						numero = true;
+					}else if(password.charCodeAt(i) != mayuscula && password.charCodeAt(i) != mayuscula){
+						letras = true;
+					}else if(password.charCodeAt(i) != numero){
+						num = true;
+					}else if(password.charCodeAt(i) != caracter_especial && password.charCodeAt(i) != 32){
+						caracter = true;
+					}else{
+						caracter_especial = true;
+					}
+				}
+				if(mayuscula == true && minuscula == true && caracter_especial == true && numero == true && letras == true && num == true && caracter == true)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		</script>
+    </head>
+    <body>
+		<fieldset style="width:50%;margin-left:25%;">
+			<legend>Validador de contraseña fuerte con javascript nativo</legend>
+			<form>
+				<label for="password">Ingrese su contraseña:</label>
+				<input type="password" id="password" value=""/>
+				<ul>
+					<li>Mínimo 16 caracteres.</li>
+					<li>Incluya minúsculas y mayúsculas.</li>
+					<li>No tener 2 letras o números iguales consecutivos.</li>
+					<li>Incluye almenos 4 números.</li>
+					<li>Incluye al menos 2 caracteres especiales, sin que se repitan o esten juntos.</li>
+					<li>No usar el número 0.</li>
+					<li>No colocar espacios.</li>
+				</ul>
+				<br/>
+				<input type="button" id="validar" onclick="javascript:validar_form();" value="Validar"/>
+			</form>
+		</fieldset>
+    </body>    
+</html>
